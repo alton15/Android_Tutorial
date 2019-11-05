@@ -69,11 +69,12 @@ public class MainActivity extends AppCompatActivity {
     private void init_tables() {
 
         if(sqLiteDatabase != null) {
-            String sqlCreateTable = "CREATE TABLE IF NOT EXISTS CONTACT_T (" +
-                    "NO "    + "INTEGER NOT NULL," +
-                    "NAME"   + "TEXT," +
-                    "PHONE " + "TEXT," +
-                    "OVER20 "+ "INTEGER" + ")";
+            String sqlCreateTable = "CREATE TABLE IF NOT EXISTS User_T (" +
+                    "NO "     + "INTEGER NOT NULL," +
+                    "NAME "   + "TEXT," +
+                    "PHONE "  + "TEXT," +
+                    "OVER20 " + "INTEGER" + ")";
+
             System.out.println(sqlCreateTable);
 
             sqLiteDatabase.execSQL(sqlCreateTable);
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void load_values() {
         if(sqLiteDatabase != null) {
-            String sqlQueryTable = "SELECT * FROM CONTACT_T";
+            String sqlQueryTable = "SELECT * FROM User_T";
             Cursor cursor = null;
 
             cursor = sqLiteDatabase.rawQuery(sqlQueryTable, null);
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void save_values() {
         if(sqLiteDatabase != null) {
-            sqLiteDatabase.execSQL("DELETE FROM CONTACT_T");
+            sqLiteDatabase.execSQL("DELETE FROM User_T");
 
             EditText editTextNo = findViewById(R.id.editTextNo);
             String noText = editTextNo.getText().toString();
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             CheckBox checkBoxOver20 = findViewById(R.id.checkBoxOver20);
             boolean isOver20 = checkBoxOver20.isChecked();
 
-            String sqlInsert = "INSERT INTO CONTACT_T " +
+            String sqlInsert = "INSERT INTO User_T " +
                     "(NO, NAME, PHONE, OVER20) VALUES (" +
                     Integer.toString(no) + "," +
                     "'" + name + "'," +
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void delete_values() {
         if(sqLiteDatabase != null) {
-            String sqlDelete = "DELETE FROM CONTACT_T";
+            String sqlDelete = "DELETE FROM User_T";
 
             sqLiteDatabase.execSQL(sqlDelete);
 

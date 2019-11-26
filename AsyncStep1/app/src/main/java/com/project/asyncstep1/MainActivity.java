@@ -9,13 +9,15 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView textView;
+    private TextView mTextView;
     Button btn_toast1, btn_toast2, btn_sleep, btn_task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTextView = findViewById(R.id.textView);
 
         btn_toast1 = findViewById(R.id.btn_toast1);
         btn_toast1.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btn_task = findViewById(R.id.btn_task);
+        btn_task.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startTask(btn_task);
+            }
+        });
     }
 
     public void displayToast(View v) {
@@ -56,5 +64,10 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public void startTask(View v) {
+        mTextView.setText("잠자는 중입니다.");
+        new MyAsyncTask(mTextView).execute();
     }
 }

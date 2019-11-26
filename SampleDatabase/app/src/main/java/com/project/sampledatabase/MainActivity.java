@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textView;
 
+    MyDBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createDatabase(String name) {
-        database = openOrCreateDatabase(name, MODE_PRIVATE, null);
+        //database = openOrCreateDatabase(name, MODE_PRIVATE, null);
+        dbHelper = new MyDBHelper(this);
+        database = dbHelper.getWritableDatabase();
     }
 
     private void createTable(String name) {
